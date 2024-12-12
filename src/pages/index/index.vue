@@ -1,56 +1,92 @@
-<!-- 使用 type="home" 属性设置首页，其他页面不需要设置，默认为page；推荐使用json5，更强大，且允许注释 -->
-<route lang="json5" type="home">
+<route lang="json5" type="page">
 {
   style: {
-    navigationStyle: 'custom',
     navigationBarTitleText: '首页',
   },
 }
 </route>
-<template>
-  <view
-    class="bg-white overflow-hidden pt-2 px-4"
-    :style="{ marginTop: safeAreaInsets?.top + 'px' }"
-  >
-    <view class="mt-12">
-      <image src="/static/logo.svg" alt="" class="w-28 h-28 block mx-auto" />
-    </view>
-    <view class="text-center text-4xl main-title-color mt-4">unibest</view>
-    <view class="text-center text-2xl mt-2 mb-8">最好用的 uniapp 开发模板</view>
 
-    <view class="text-justify max-w-100 m-auto text-4 indent mb-2">{{ description }}</view>
-    <view class="text-center mt-8">
-      当前平台是：
-      <text class="text-green-500">{{ PLATFORM.platform }}</text>
+<template>
+  <view>
+    <view class="banner w-750rpx py-20rpx">
+      <swiper
+        circular
+        indicator-dots
+        indicator-color="rgba(255, 255, 255, 0.5)"
+        indicator-active-color="rgba(255, 255, 255, 1)"
+        autoplay
+        class="w-750rpx h-340rpx"
+      >
+        <swiper-item v-for="item in 3" :key="item" class="w-100% h-100% px-20rpx">
+          <image src="@/common/images/banner1.jpg" class="w-100% h-100%" mode="aspectFill" />
+        </swiper-item>
+      </swiper>
     </view>
-    <view class="text-center mt-4">
-      模板分支是：
-      <text class="text-green-500">base</text>
+
+    <view class="w-690rpx h-80rpx bg-gray-200 rounded-20rpx mx-auto flex line-height-80rpx">
+      <view class="w-140rpx flex items-center justify-center">
+        <wd-icon name="sound" size="40rpx" color="#28B389"></wd-icon>
+        <text class="color-#28B389 font-size-28rpx font-semibold">公告</text>
+      </view>
+
+      <view class="flex-1 flex items-center justify-center">
+        <swiper circular autoplay vertical interval="1000" duration="300" class="h-100%">
+          <swiper-item class="h-100% font-size-30rpx text-truncate" v-for="item in 3" :key="item">
+            <text class="w-100% text-truncate">年时都阿什顿hi吉安市打款哈卡斯就会打开</text>
+          </swiper-item>
+        </swiper>
+      </view>
+
+      <view class="w-70rpx flex items-center justify-center">
+        <wd-icon name="arrow-right" size="30rpx" color="#28B389"></wd-icon>
+      </view>
+    </view>
+
+    <view class="pt-50rpx">
+      <common-title>
+        <template #name>每日推荐</template>
+        <template #custom>
+          <view class="flex items-center justify-center">
+            <wd-icon name="calendar" size="50rpx" color="#28B389"></wd-icon>
+            <text class="color-#28B389 font-size-28rpx font-semibold ml-5rpx">
+              {{ currentDay }}日
+            </text>
+          </view>
+        </template>
+      </common-title>
+      <view class="w-720rpx ml-30rpx mt-30rpx">
+        <scroll-view scroll-x class="whitespace-nowrap">
+          <view
+            class="w-200rpx h-430rpx inline-block mr-15rpx last:mr-[30rpx]"
+            v-for="item in 8"
+            :key="item"
+          >
+            <image
+              src="@/common/images/preview_small.webp"
+              class="w-100% h-100% rounded-10rpx"
+              mode="aspectFill"
+            />
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+
+    <view class="pt-50rpx">
+      <common-title>
+        <template #name>专题精选</template>
+        <template #custom>
+          <navigator url="#" class="font-size-32rpx color-#28B389">More+</navigator>
+        </template>
+      </common-title>
     </view>
   </view>
 </template>
 
-<script lang="ts" setup>
-import PLATFORM from '@/utils/platform'
-
-defineOptions({
-  name: 'Home',
-})
-
-// 获取屏幕边界到安全区域距离
-const { safeAreaInsets } = uni.getSystemInfoSync()
-const author = ref('菲鸽')
-const description = ref(
-  'unibest 是一个集成了多种工具和技术的 uniapp 开发模板，由 uniapp + Vue3 + Ts + Vite4 + UnoCss + UniUI + VSCode 构建，模板具有代码提示、自动格式化、统一配置、代码片段等功能，并内置了许多常用的基本组件和基本功能，让你编写 uniapp 拥有 best 体验。',
-)
-// 测试 uni API 自动引入
-onLoad(() => {
-  console.log(author)
+<script setup>
+import { computed } from 'vue'
+const currentDay = computed(() => {
+  return new Date().getDate()
 })
 </script>
 
-<style>
-.main-title-color {
-  color: #d14328;
-}
-</style>
+<style lang="scss" scoped></style>

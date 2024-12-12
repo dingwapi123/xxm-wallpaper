@@ -25,6 +25,7 @@ module.exports = {
   ],
   // 自定义规则
   rules: {
+    'scss/load-partial-extension': null, // 禁用该规则,否则自动补全scss文件时会报错，会强制消除文件拓展名
     'prettier/prettier': true,
     // 允许 global 、export 、v-deep等伪类
     'selector-pseudo-class-no-unknown': [
@@ -40,12 +41,7 @@ module.exports = {
       },
     ],
     // 处理小程序page标签不认识的问题
-    'selector-type-no-unknown': [
-      true,
-      {
-        ignoreTypes: ['page'],
-      },
-    ],
+    'selector-type-no-unknown': null,
     'comment-empty-line-before': 'never', // never|always|always-multi-line|never-multi-line
     'custom-property-empty-line-before': 'never',
     'no-empty-source': null,
