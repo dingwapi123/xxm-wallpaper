@@ -79,6 +79,8 @@
         </template>
       </common-title>
     </view>
+
+    <view>nihao</view>
   </view>
 </template>
 
