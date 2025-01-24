@@ -9,7 +9,11 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
-import { presetApplet, presetRemRpx, transformerAttributify } from 'unocss-applet'
+import {
+  presetApplet,
+  presetRemRpx,
+  transformerAttributify,
+} from 'unocss-applet'
 
 // @see https://unocss.dev/presets/legacy-compat
 // import { presetLegacyCompat } from '@unocss/preset-legacy-compat'
