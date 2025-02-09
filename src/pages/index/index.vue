@@ -2,12 +2,13 @@
 {
   style: {
     navigationBarTitleText: '首页',
+    navigationStyle: 'custom',
   },
 }
 </route>
 
 <template>
-  <view>
+  <view class="pageBg">
     <view class="banner w-750rpx py-20rpx">
       <swiper
         circular
@@ -17,22 +18,45 @@
         autoplay
         class="w-750rpx h-340rpx"
       >
-        <swiper-item v-for="item in 3" :key="item" class="w-100% h-100% px-20rpx">
-          <image src="@/common/images/banner1.jpg" class="w-100% h-100%" mode="aspectFill" />
+        <swiper-item
+          v-for="item in 3"
+          :key="item"
+          class="w-100% h-100% px-20rpx"
+        >
+          <image
+            src="@/common/images/banner1.jpg"
+            class="w-100% h-100%"
+            mode="aspectFill"
+          />
         </swiper-item>
       </swiper>
     </view>
 
-    <view class="w-690rpx h-80rpx bg-gray-200 rounded-20rpx mx-auto flex line-height-80rpx">
+    <view
+      class="w-690rpx h-80rpx bg-gray-200 rounded-20rpx mx-auto flex line-height-80rpx"
+    >
       <view class="w-140rpx flex items-center justify-center">
         <wd-icon name="sound" size="40rpx" color="#28B389"></wd-icon>
         <text class="color-#28B389 font-size-28rpx font-semibold">公告</text>
       </view>
 
       <view class="flex-1 flex items-center justify-center">
-        <swiper circular autoplay vertical interval="1000" duration="300" class="h-100%">
-          <swiper-item class="h-100% font-size-30rpx text-truncate" v-for="item in 3" :key="item">
-            <text class="w-100% text-truncate">年时都阿什顿hi吉安市打款哈卡斯就会打开</text>
+        <swiper
+          circular
+          autoplay
+          vertical
+          interval="1000"
+          duration="300"
+          class="h-100%"
+        >
+          <swiper-item
+            class="h-100% font-size-30rpx text-truncate"
+            v-for="item in 3"
+            :key="item"
+          >
+            <text class="w-100% text-truncate">
+              年时都阿什顿hi吉安市打款哈卡斯就会打开
+            </text>
           </swiper-item>
         </swiper>
       </view>
@@ -75,12 +99,19 @@
       <common-title>
         <template #name>专题精选</template>
         <template #custom>
-          <navigator url="#" class="font-size-32rpx color-#28B389">More+</navigator>
+          <navigator url="#" class="font-size-32rpx color-#28B389">
+            More+
+          </navigator>
         </template>
       </common-title>
-    </view>
 
-    <view>nihao</view>
+      <view
+        class="mt-50rpx px-0 py-30rpx grid grid-cols-[repeat(3,1fr)] gap-15rpx ml-30rpx mr-30rpx"
+      >
+        <theme-item v-for="item in 8" :key="item"></theme-item>
+        <theme-item :isMore="true"></theme-item>
+      </view>
+    </view>
   </view>
 </template>
 
