@@ -1,9 +1,10 @@
 // 全局要用的类型放到这里
 
 type IResData<T> = {
-  code: number
-  msg: string
+  errCode: number
+  errMsg: string
   data: T
+  timeCost?: number
 }
 
 // uni.uploadFile文件上传参数
