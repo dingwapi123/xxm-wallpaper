@@ -10,9 +10,30 @@
 
 :root,
 page {
-  // 修改按主题色
-  // --wot-color-theme: #37c2bc;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --text-primary: #333333;
+  --text-secondary: #999999;
+  --border-color: #eeeeee;
+  --brand-color: #28b389;
 
-  // 修改按钮背景色
-  // --wot-button-primary-bg-color: green;
+  // wot-design variables override if needed
+  // --wot-color-theme: #28b389;
+}
+
+.dark {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #242424;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --border-color: #333333;
+}
+
+// Apply background to page if possible, or rely on layout wrapper
+page {
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
