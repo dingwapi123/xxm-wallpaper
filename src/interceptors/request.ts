@@ -47,6 +47,7 @@ const httpInterceptor = {
     // 2. （可选）添加小程序端请求头标识
     options.header = {
       platform, // 可选，与 uniapp 定义的平台一致，告诉后台来源
+      'access-key': '123321', // 咸虾米API 访问密钥
       ...options.header,
     }
     // 3. 添加 token 请求头标识
