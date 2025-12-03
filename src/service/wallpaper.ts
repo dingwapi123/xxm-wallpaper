@@ -104,3 +104,16 @@ export const getUserWallList = (params: {
     query: params,
   })
 }
+
+/** 搜索壁纸 */
+export const searchWall = (params: {
+  keyword: string
+  pageNum?: number
+  pageSize?: number
+}) => {
+  return http<WallPaperItem[]>({
+    url: '/searchWall',
+    method: 'GET',
+    query: params,
+  })
+}
