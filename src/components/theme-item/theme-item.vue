@@ -3,10 +3,7 @@
     <navigator
       v-if="!isMore && item"
       :url="
-        '/pages/classlist/classlist?classid=' +
-        item._id +
-        '&name=' +
-        item.classname
+        '/pages/classlist/classlist?classid=' + item._id + '&name=' + item.name
       "
       class="h-100% rounded-10rpx overflow-hidden relative"
     >
@@ -18,7 +15,7 @@
       <view
         class="absolute left-0 bottom-0 bg-black/20 text-white w-100% flex items-center justify-center h-70rpx backdrop-blur-md font-bold"
       >
-        {{ item.classname }}
+        {{ item.name }}
       </view>
       <view
         class="absolute left-0 top-0 bg-[#fa815a]/70 text-white rounded-br-20rpx px-15rpx py-5rpx font-size-22rpx"

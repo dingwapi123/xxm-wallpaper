@@ -146,7 +146,7 @@
             v-for="item in classifyList"
             :key="item._id"
             class="rounded-10rpx overflow-hidden relative h-340rpx"
-            @click="goClassList(item._id, item.classname)"
+            @click="goClassList(item._id, item.name)"
           >
             <image
               :src="item.picurl"
@@ -157,7 +157,7 @@
               class="absolute bottom-0 left-0 w-100% h-70rpx bg-black/30 flex items-center justify-center backdrop-blur-sm"
             >
               <text class="text-white font-size-28rpx">
-                {{ item.classname }}
+                {{ item.name }}
               </text>
             </view>
           </view>
@@ -212,7 +212,7 @@ const getNotice = async () => {
 
 const getRandom = async () => {
   try {
-    const res = await getWallList({ pageSize: 9 })
+    const res = await getWallList({ pageNum: 1, pageSize: 9 })
     randomList.value = res.data
   } catch (e) {
     console.error(e)

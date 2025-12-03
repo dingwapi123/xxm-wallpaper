@@ -25,7 +25,7 @@ export interface WallPaperItem {
 /** 分类数据 */
 export interface ClassifyItem {
   _id: string
-  classname: string
+  name: string
   picurl: string
   select: boolean
   createTime: number
@@ -52,7 +52,9 @@ export const getHomeBanner = () => {
 }
 
 /** 获取随机/推荐壁纸 */
-export const getWallList = (params: { classid?: string; pageNum?: number; pageSize?: number } = {}) => {
+export const getWallList = (
+  params: { classid?: string; pageNum?: number; pageSize?: number } = {},
+) => {
   return http<WallPaperItem[]>({
     url: '/wallList',
     method: 'GET',
@@ -61,7 +63,9 @@ export const getWallList = (params: { classid?: string; pageNum?: number; pageSi
 }
 
 /** 获取分类列表 */
-export const getClassify = (params: { select?: boolean; pageNum?: number; pageSize?: number } = {}) => {
+export const getClassify = (
+  params: { select?: boolean; pageNum?: number; pageSize?: number } = {},
+) => {
   return http<ClassifyItem[]>({
     url: '/classify',
     method: 'GET',
@@ -70,7 +74,9 @@ export const getClassify = (params: { select?: boolean; pageNum?: number; pageSi
 }
 
 /** 获取壁纸资讯 */
-export const getWallNewsList = (params: { select?: boolean; pageNum?: number; pageSize?: number } = {}) => {
+export const getWallNewsList = (
+  params: { select?: boolean; pageNum?: number; pageSize?: number } = {},
+) => {
   return http<NewsItem[]>({
     url: '/wallNewsList',
     method: 'GET',
@@ -79,7 +85,11 @@ export const getWallNewsList = (params: { select?: boolean; pageNum?: number; pa
 }
 
 /** 获取用户壁纸 (下载/评分) */
-export const getUserWallList = (params: { type: 'download' | 'score'; pageNum?: number; pageSize?: number }) => {
+export const getUserWallList = (params: {
+  type: 'download' | 'score'
+  pageNum?: number
+  pageSize?: number
+}) => {
   return http<WallPaperItem[]>({
     url: '/userWallList',
     method: 'GET',
