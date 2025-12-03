@@ -36,6 +36,12 @@
         "text": "分类"
       },
       {
+        "iconPath": "static/images/tabbar/subjectList.png",
+        "selectedIconPath": "static/images/tabbar/subjectList-h.png",
+        "pagePath": "pages/subject/subject",
+        "text": "专题"
+      },
+      {
         "iconPath": "static/images/tabbar/user.png",
         "selectedIconPath": "static/images/tabbar/user-h.png",
         "pagePath": "pages/user/user",
@@ -75,6 +81,24 @@
       "layout": "default",
       "style": {
         "navigationBarTitleText": "预览",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/search/search",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "搜索",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/subject/subject",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "专题",
         "navigationStyle": "custom"
       }
     },
