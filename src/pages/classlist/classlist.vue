@@ -40,7 +40,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { onLoad, onReachBottom } from '@dcloudio/uni-app'
-import { getWallList, getUserWallList } from '@/service/wallpaper'
+import {
+  getWallList,
+  getUserWallList,
+  getSubjectDetail,
+} from '@/service/wallpaper'
 import type { WallPaperItem } from '@/service/wallpaper'
 import CustomNavBack from '@/components/custom-nav-back/custom-nav-back.vue'
 
@@ -57,12 +61,30 @@ const getData = async () => {
   loading.value = true
   try {
     let res
-    if (queryParams.value.type) {
+    if (
+      queryParams.value.type === 'download' ||
+      queryParams.value.type === 'score'
+    ) {
       res = await getUserWallList({
         type: queryParams.value.type,
         pageNum: pageNum.value,
         pageSize,
       })
+    } else if (queryParams.value.type === 'subject') {
+      // 专题详情返回的数据结构不同，包含 picList
+      const detailRes = await getSubjectDetail({
+        id: queryParams.value.classid,
+      })
+      // 专题详情没有分页，直接取 picList
+      // 模拟分页效果或一次性加载
+      // 这里假设专题详情一次性返回所有图片
+      res = {
+        data: detailRes.data.picList || [],
+        errCode: detailRes.errCode,
+        errMsg: detailRes.errMsg,
+      }
+      // 专题详情因为没有分页，加载一次后即可视为无更多
+      noMore.value = true
     } else {
       res = await getWallList({
         classid: queryParams.value.classid,
@@ -71,7 +93,7 @@ const getData = async () => {
       })
     }
 
-    if (res.data.length < pageSize) {
+    if (res.data.length < pageSize && queryParams.value.type !== 'subject') {
       noMore.value = true
     }
     if (pageNum.value === 1) {
