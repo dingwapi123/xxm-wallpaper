@@ -9,19 +9,19 @@
 </route>
 
 <template>
-  <view class="pageBg min-h-screen pt-safe">
-    <!-- 顶部搜索栏 -->
-    <view class="flex items-center px-30rpx py-20rpx">
-      <view class="flex-1 mr-20rpx">
-        <wd-search
-          v-model="keyword"
-          placeholder="搜索壁纸..."
-          cancel-button="always"
-          @search="onSearch"
-          @cancel="onCancel"
-          @clear="onClear"
-        />
-      </view>
+  <view class="pageBg min-h-screen">
+    <custom-nav-back title="搜索"></custom-nav-back>
+
+    <!-- 搜索框区域 -->
+    <view class="px-30rpx py-20rpx">
+      <wd-search
+        v-model="keyword"
+        placeholder="搜索壁纸..."
+        cancel-button="always"
+        @search="onSearch"
+        @cancel="onCancel"
+        @clear="onClear"
+      />
     </view>
 
     <!-- 搜索历史 -->
@@ -49,7 +49,10 @@
 
     <!-- 搜索结果 -->
     <view v-if="hasSearched" class="px-5rpx pt-20rpx">
-      <view v-if="wallList.length > 0" class="grid grid-cols-3 gap-5rpx pb-100rpx">
+      <view
+        v-if="wallList.length > 0"
+        class="grid grid-cols-3 gap-5rpx pb-100rpx"
+      >
         <view
           v-for="item in wallList"
           :key="item._id"
@@ -85,6 +88,7 @@ import { ref } from 'vue'
 import { onReachBottom, onLoad } from '@dcloudio/uni-app'
 import { searchWall } from '@/service/wallpaper'
 import type { WallPaperItem } from '@/service/wallpaper'
+import CustomNavBack from '@/components/custom-nav-back/custom-nav-back.vue'
 
 const keyword = ref('')
 const historyList = ref<string[]>([])
@@ -137,13 +141,13 @@ const clickHistory = (key: string) => {
 const onSearch = async () => {
   if (!keyword.value.trim()) return
   saveHistory(keyword.value)
-  
+
   // 重置状态
   pageNum.value = 1
   wallList.value = []
   noMore.value = false
   hasSearched.value = true
-  
+
   await getData()
 }
 
@@ -160,18 +164,18 @@ const onClear = () => {
 const getData = async () => {
   if (loading.value || noMore.value) return
   loading.value = true
-  
+
   try {
     const res = await searchWall({
       keyword: keyword.value,
       pageNum: pageNum.value,
       pageSize,
     })
-    
+
     if (res.data.length < pageSize) {
       noMore.value = true
     }
-    
+
     if (pageNum.value === 1) {
       wallList.value = res.data
     } else {
@@ -193,7 +197,7 @@ const goPreview = (id: string) => {
 }
 
 onReachBottom(() => {
-  if (hasSearched) {
+  if (hasSearched.value) {
     getData()
   }
 })
