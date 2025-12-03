@@ -62,6 +62,14 @@ export const getWallList = (
   })
 }
 
+/** 获取随机壁纸 */
+export const getRandomWall = () => {
+  return http<WallPaperItem[]>({
+    url: '/randomWall',
+    method: 'GET',
+  })
+}
+
 /** 获取分类列表 */
 export const getClassify = (
   params: { select?: boolean; pageNum?: number; pageSize?: number } = {},

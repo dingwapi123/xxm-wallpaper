@@ -58,8 +58,8 @@
           circular
           autoplay
           vertical
-          interval="3000"
-          duration="500"
+          :interval="3000"
+          :duration="500"
           class="h-100% w-100%"
         >
           <swiper-item
@@ -175,6 +175,7 @@ import {
   getWallNewsList,
   getWallList,
   getClassify,
+  getRandomWall,
 } from '@/service/wallpaper'
 import type {
   BannerItem,
@@ -212,7 +213,7 @@ const getNotice = async () => {
 
 const getRandom = async () => {
   try {
-    const res = await getWallList({ pageNum: 1, pageSize: 9 })
+    const res = await getRandomWall()
     randomList.value = res.data
   } catch (e) {
     console.error(e)
@@ -221,7 +222,7 @@ const getRandom = async () => {
 
 const getClassifyData = async () => {
   try {
-    const res = await getClassify({ select: true, pageSize: 9 })
+    const res = await getClassify({ pageSize: 9 })
     classifyList.value = res.data
   } catch (e) {
     console.error(e)
