@@ -9,131 +9,133 @@
 </route>
 
 <template>
-  <view class="px-30rpx min-h-100vh pageBg">
+  <view class="px-30rpx min-h-100vh pageBg pt-safe">
     <view class="flex items-center justify-center pt-50rpx flex-col">
-      <view class="rounded-50% overflow-hidden w-160rpx h-160rpx">
+      <view class="rounded-50% overflow-hidden w-160rpx h-160rpx shadow-lg">
         <image
           class="w-100% h-100%"
           src="../../static/images/xxmLogo.png"
           mode="scaleToFill"
         />
       </view>
-
-      <view class="font-size-33rpx pt-20rpx">ip:1002134123123</view>
-
-      <view class="color-gray pt-30rpx">地区</view>
+      <view class="font-size-33rpx pt-20rpx text-[var(--text-primary)]">
+        IP: 127.0.0.1
+      </view>
+      <view class="text-[var(--text-secondary)] pt-10rpx">来自：未知</view>
     </view>
 
     <view
-      class="list my-50rpx b-1rpx b-solid b-#aaa rounded-10rpx shadow-lg shadow-op-20 shadow-#28B389 bg-white"
+      class="list my-50rpx rounded-10rpx shadow-lg shadow-black/5 bg-white dark:bg-gray-800 overflow-hidden"
     >
+      <!-- Theme Toggle -->
       <view
-        class="row px-30rpx py-25rpx b-solid b-#aaa b-b-1 b-l-0 b-r-0 b-t-0 flex items-center justify-between"
+        class="row px-30rpx py-30rpx border-b-1 border-solid border-[var(--border-color)] flex items-center justify-between active:bg-gray-100 dark:active:bg-gray-700"
+        @click="themeStore.toggleMode()"
+      >
+        <view class="left flex items-center justify-center">
+          <wd-icon
+            name="setting"
+            size="22px"
+            custom-class="text-[var(--brand-color)]"
+            class="mr-10rpx"
+          ></wd-icon>
+          <text class="text-[var(--text-primary)]">主题切换</text>
+        </view>
+        <view class="right flex items-center justify-center">
+          <text class="text-[var(--text-secondary)] mr-10rpx">
+            {{
+              themeStore.mode === 'auto'
+                ? '自动'
+                : themeStore.isDark
+                  ? '深色'
+                  : '浅色'
+            }}
+          </text>
+          <wd-icon
+            name="arrow-right"
+            size="22px"
+            custom-class="text-[var(--text-secondary)]"
+          ></wd-icon>
+        </view>
+      </view>
+
+      <!-- Download -->
+      <view
+        class="row px-30rpx py-30rpx border-b-1 border-solid border-[var(--border-color)] flex items-center justify-between active:bg-gray-100 dark:active:bg-gray-700"
+        @click="goList('download')"
       >
         <view class="left flex items-center justify-center">
           <wd-icon
             name="download"
             size="22px"
-            color="#28B389"
+            custom-class="text-[var(--brand-color)]"
             class="mr-10rpx"
           ></wd-icon>
-          <text>我的下载</text>
+          <text class="text-[var(--text-primary)]">我的下载</text>
         </view>
         <view class="right flex items-center justify-center">
-          <text>33</text>
-          <wd-icon name="arrow-right" size="22px" color="#666666"></wd-icon>
+          <text class="text-[var(--text-secondary)]">0</text>
+          <wd-icon
+            name="arrow-right"
+            size="22px"
+            custom-class="text-[var(--text-secondary)]"
+          ></wd-icon>
         </view>
       </view>
 
+      <!-- Score -->
       <view
-        class="row px-30rpx py-25rpx b-solid b-#aaa b-b-1 b-l-0 b-r-0 b-t-0 flex items-center justify-between"
+        class="row px-30rpx py-30rpx border-b-1 border-solid border-[var(--border-color)] flex items-center justify-between active:bg-gray-100 dark:active:bg-gray-700"
+        @click="goList('score')"
       >
         <view class="left flex items-center justify-center">
           <wd-icon
             name="star"
             size="22px"
-            color="#28B389"
+            custom-class="text-[var(--brand-color)]"
             class="mr-10rpx"
           ></wd-icon>
-          <text>我的评分</text>
+          <text class="text-[var(--text-primary)]">我的评分</text>
         </view>
         <view class="right flex items-center justify-center">
-          <text>33</text>
-          <wd-icon name="arrow-right" size="22px" color="#666666"></wd-icon>
+          <text class="text-[var(--text-secondary)]">0</text>
+          <wd-icon
+            name="arrow-right"
+            size="22px"
+            custom-class="text-[var(--text-secondary)]"
+          ></wd-icon>
         </view>
       </view>
 
+      <!-- Contact -->
       <view
-        class="row relative px-30rpx py-25rpx flex items-center justify-between"
+        class="row relative px-30rpx py-30rpx flex items-center justify-between active:bg-gray-100 dark:active:bg-gray-700"
       >
         <view class="left flex items-center justify-center">
           <wd-icon
             name="chat1"
             size="22px"
-            color="#28B389"
+            custom-class="text-[var(--brand-color)]"
             class="mr-10rpx"
           ></wd-icon>
-          <text>联系客服</text>
+          <text class="text-[var(--text-primary)]">联系客服</text>
         </view>
 
         <!-- #ifdef MP -->
         <button
           open-type="contact"
-          class="absolute top-0rpx left-0rpx h-100rpx w-100% opacity-0"
+          class="absolute top-0rpx left-0rpx h-100% w-100% opacity-0"
         >
           模拟客服
         </button>
         <!-- #endif -->
-        <!-- #ifdef H5 -->
-        <button
-          @click="clickContact"
-          class="absolute top-0rpx left-0rpx h-100rpx w-100% opacity-0"
-        >
-          拨打电话
-        </button>
-        <!-- #endif -->
 
         <view class="right flex items-center justify-center">
-          <text>33</text>
-          <wd-icon name="arrow-right" size="22px" color="#666666"></wd-icon>
-        </view>
-      </view>
-    </view>
-
-    <view
-      class="list bg-white my-50rpx b-1rpx b-solid b-#aaa rounded-10rpx shadow-lg shadow-op-20 shadow-#28B389"
-    >
-      <view
-        class="row px-30rpx py-25rpx b-solid b-#aaa b-b-1 b-l-0 b-r-0 b-t-0 flex items-center justify-between"
-      >
-        <view class="left flex items-center justify-center">
           <wd-icon
-            name="notification"
+            name="arrow-right"
             size="22px"
-            color="#28B389"
-            class="mr-10rpx"
+            custom-class="text-[var(--text-secondary)]"
           ></wd-icon>
-          <text>订阅更新</text>
-        </view>
-        <view class="right flex items-center justify-center">
-          <text>33</text>
-          <wd-icon name="arrow-right" size="22px" color="#666666"></wd-icon>
-        </view>
-      </view>
-
-      <view class="row px-30rpx py-25rpx flex items-center justify-between">
-        <view class="left flex items-center justify-center">
-          <wd-icon
-            name="flag"
-            size="22px"
-            color="#28B389"
-            class="mr-10rpx"
-          ></wd-icon>
-          <text>常见问题</text>
-        </view>
-        <view class="right flex items-center justify-center">
-          <text>33</text>
-          <wd-icon name="arrow-right" size="22px" color="#666666"></wd-icon>
         </view>
       </view>
     </view>
@@ -141,16 +143,13 @@
 </template>
 
 <script lang="ts" setup>
-//
-const clickContact = () => {
-  uni.makePhoneCall({
-    phoneNumber: '123456789',
+import { useThemeStore } from '@/store'
+
+const themeStore = useThemeStore()
+
+const goList = (type: string) => {
+  uni.navigateTo({
+    url: `/pages/classlist/classlist?type=${type}&name=${type === 'download' ? '我的下载' : '我的评分'}`,
   })
 }
 </script>
-
-<style lang="scss" scoped>
-.row:last-child {
-  border: 0px;
-}
-</style>
