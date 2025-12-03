@@ -7,6 +7,8 @@
       :class="{ dark: themeStore.isDark }"
       class="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300"
     >
+      <!-- 状态栏占位 -->
+      <view :style="{ height: statusBarHeight + 'px' }"></view>
       <slot />
     </view>
     <wd-toast />
@@ -15,10 +17,16 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
 import type { ConfigProviderThemeVars } from 'wot-design-uni'
 import { useThemeStore } from '@/store'
 
 const themeStore = useThemeStore()
+const statusBarHeight = ref(0)
+
+// 获取状态栏高度
+const { statusBarHeight: height } = uni.getSystemInfoSync()
+statusBarHeight.value = height || 0
 
 const themeVars: ConfigProviderThemeVars = {
   // colorTheme: 'red',
