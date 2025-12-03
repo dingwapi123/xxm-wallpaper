@@ -9,13 +9,12 @@ interface NavigateToOptions {
        "/pages/classlist/classlist" |
        "/pages/preview/preview" |
        "/pages/search/search" |
-       "/pages/subject/subject" |
-       "/pages/user/user";
+       "/pages/subject/subject";
 }
 interface RedirectToOptions extends NavigateToOptions {}
 
 interface SwitchTabOptions {
-  url: "/pages/index/index" | "/pages/classify/classify" | "/pages/subject/subject" | "/pages/user/user"
+  url: "/pages/index/index" | "/pages/classify/classify" | "/pages/subject/subject"
 }
 
 type ReLaunchOptions = NavigateToOptions | SwitchTabOptions;

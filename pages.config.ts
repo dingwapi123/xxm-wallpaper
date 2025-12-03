@@ -44,12 +44,6 @@ export default defineUniPages({
         pagePath: 'pages/subject/subject',
         text: '专题',
       },
-      {
-        iconPath: 'static/images/tabbar/user.png',
-        selectedIconPath: 'static/images/tabbar/user-h.png',
-        pagePath: 'pages/user/user',
-        text: '我的',
-      },
     ],
   },
 })

@@ -40,12 +40,6 @@
         "selectedIconPath": "static/images/tabbar/subjectList-h.png",
         "pagePath": "pages/subject/subject",
         "text": "专题"
-      },
-      {
-        "iconPath": "static/images/tabbar/user.png",
-        "selectedIconPath": "static/images/tabbar/user-h.png",
-        "pagePath": "pages/user/user",
-        "text": "我的"
       }
     ]
   },
@@ -99,15 +93,6 @@
       "layout": "default",
       "style": {
         "navigationBarTitleText": "专题",
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/user/user",
-      "type": "page",
-      "layout": "default",
-      "style": {
-        "navigationBarTitleText": "我的",
         "navigationStyle": "custom"
       }
     }
