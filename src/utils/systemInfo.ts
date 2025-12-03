@@ -20,9 +20,6 @@ export const getMenuButtonInfo =
     // #ifdef MP
     return uni.getMenuButtonBoundingClientRect()
     // #endif
-    // #ifndef MP
-    return null
-    // #endif
   }
 
 /**
@@ -83,11 +80,31 @@ export const getSafeAreaInsets = () => {
   )
 }
 
+/**
+ * 获取胶囊上边界坐标（用于对齐）
+ * @returns {number} 胶囊上边界坐标，H5 返回 0
+ */
+export const getMenuButtonTop = (): number => {
+  const menuButtonInfo = getMenuButtonInfo()
+  return menuButtonInfo ? menuButtonInfo.top : 0
+}
+
+/**
+ * 获取胶囊高度
+ * @returns {number} 胶囊高度，H5 返回 32
+ */
+export const getMenuButtonHeight = (): number => {
+  const menuButtonInfo = getMenuButtonInfo()
+  return menuButtonInfo ? menuButtonInfo.height : 32
+}
+
 export default {
   getStatusBarHeight,
   getNavBarContentHeight,
   getNavBarHeight,
   getMenuButtonInfo,
   getMenuButtonLeft,
+  getMenuButtonTop,
+  getMenuButtonHeight,
   getSafeAreaInsets,
 }

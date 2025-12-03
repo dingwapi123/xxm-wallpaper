@@ -9,52 +9,44 @@
 </route>
 
 <template>
-  <view class="pageBg min-h-screen pt-safe">
-    <view class="h-88rpx flex items-center px-30rpx">
-      <text
-        class="font-size-36rpx font-bold text-[var(--text-primary)] mr-20rpx"
-      >
-        专题
-      </text>
-      <view
-        class="flex-1 h-64rpx bg-gray-100 dark:bg-gray-800 rounded-32rpx flex items-center px-20rpx"
-        @click="goSearch"
-      >
-        <wd-icon name="search" size="32rpx" color="#999"></wd-icon>
-        <text class="ml-10rpx text-gray-400 text-24rpx">搜索壁纸</text>
-      </view>
-    </view>
+  <view class="pageBg min-h-screen">
+    <custom-navbar title="专题" @search="goSearch" />
 
     <view class="px-30rpx pt-15rpx pb-100rpx">
       <view
-        v-for="item in classifyList"
+        v-for="item in subjectList"
         :key="item._id"
         class="mb-30rpx bg-white dark:bg-gray-800 rounded-20rpx overflow-hidden shadow-sm"
-        @click="goClassList(item._id, item.name)"
+        @click="goClassList(item._id, item.theme)"
       >
-        <view class="h-340rpx relative">
+        <view class="h-340rpx relative grid grid-cols-3 gap-1">
+          <!-- Display first 3 images of the subject -->
           <image
-            :src="item.picurl"
-            class="w-100% h-100% bg-gray-200 dark:bg-gray-700"
+            v-for="pic in item.picList.slice(0, 3)"
+            :key="pic._id"
+            :src="pic.smallPicurl"
+            class="w-100% h-100% bg-gray-200 dark:bg-gray-700 object-cover"
             mode="aspectFill"
           ></image>
+
+          <!-- Mask overlay for text readability if needed, or just styling -->
           <view
-            class="absolute bottom-0 left-0 w-100% h-100rpx bg-gradient-to-t from-black/60 to-transparent"
+            class="absolute bottom-0 left-0 w-100% h-100rpx bg-gradient-to-t from-black/60 to-transparent col-span-3"
           ></view>
         </view>
         <view class="p-20rpx">
           <view
             class="text-[var(--text-primary)] font-bold text-32rpx mb-10rpx"
           >
-            {{ item.name }}
+            {{ item.theme }}
           </view>
           <view
             class="flex justify-between items-center text-[var(--text-secondary)] text-24rpx"
           >
-            <text>{{ formatTime(item.createTime) }}更新</text>
+            <text>更新于 {{ item.day }}</text>
             <view class="flex items-center">
               <wd-icon name="image" size="28rpx" class="mr-5rpx"></wd-icon>
-              <text>精选壁纸</text>
+              <text>{{ item.size }}张</text>
             </view>
           </view>
         </view>
@@ -66,15 +58,16 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { onLoad, onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
-import { getClassify } from '@/service/wallpaper'
-import type { ClassifyItem } from '@/service/wallpaper'
+import { getSubjectList } from '@/service/wallpaper'
+import type { SubjectItem } from '@/service/wallpaper'
+import CustomNavbar from '@/components/custom-navbar/custom-navbar.vue'
 
-const classifyList = ref<ClassifyItem[]>([])
+const subjectList = ref<SubjectItem[]>([])
 
 const getData = async () => {
   try {
-    const res = await getClassify({ pageSize: 20, select: true })
-    classifyList.value = res.data
+    const res = await getSubjectList({ pageSize: 20 })
+    subjectList.value = res.data
   } catch (e) {
     console.error(e)
   }
@@ -88,17 +81,8 @@ const goSearch = () => {
 
 const goClassList = (id: string, name: string) => {
   uni.navigateTo({
-    url: `/pages/classlist/classlist?classid=${id}&name=${name}`,
+    url: `/pages/classlist/classlist?classid=${id}&name=${name}&type=subject`,
   })
-}
-
-const formatTime = (time: number) => {
-  if (!time) return ''
-  const date = new Date(time)
-  const now = new Date()
-  const diff = now.getTime() - time
-  if (diff < 86400000 * 30) return '最近'
-  return `${date.getMonth() + 1}月${date.getDate()}日`
 }
 
 onLoad(() => {

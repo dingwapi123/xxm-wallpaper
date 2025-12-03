@@ -8,18 +8,11 @@
 </route>
 
 <template>
-  <view class="pageBg pb-100rpx pt-20rpx">
-    <!-- 顶部搜索栏 -->
-    <view
-      class="w-690rpx h-80rpx bg-gray-100 dark:bg-gray-800 rounded-40rpx mx-auto flex items-center px-30rpx mb-30rpx box-border"
-      @click="goSearch"
-    >
-      <wd-icon name="search" size="40rpx" color="#999"></wd-icon>
-      <text class="ml-20rpx text-gray-400 text-28rpx">搜索壁纸</text>
-    </view>
+  <view class="pageBg pb-100rpx">
+    <custom-navbar @search="goSearch" />
 
     <!-- Banner -->
-    <view class="banner w-750rpx">
+    <view class="banner w-750rpx pt-20rpx">
       <swiper
         circular
         indicator-dots
@@ -194,6 +187,7 @@ import type {
 } from '@/service/wallpaper'
 // Component import is handled by easycom usually, but safe to import
 import CommonTitle from '@/components/common-title/common-title.vue'
+import CustomNavbar from '@/components/custom-navbar/custom-navbar.vue'
 
 const bannerList = ref<BannerItem[]>([])
 const noticeList = ref<NewsItem[]>([])

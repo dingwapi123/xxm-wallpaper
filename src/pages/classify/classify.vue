@@ -9,21 +9,8 @@
 </route>
 
 <template>
-  <view class="pageBg min-h-screen pt-safe">
-    <view class="h-88rpx flex items-center px-30rpx">
-      <text
-        class="font-size-36rpx font-bold text-[var(--text-primary)] mr-20rpx"
-      >
-        分类
-      </text>
-      <view
-        class="flex-1 h-64rpx bg-gray-100 dark:bg-gray-800 rounded-32rpx flex items-center px-20rpx"
-        @click="goSearch"
-      >
-        <wd-icon name="search" size="32rpx" color="#999"></wd-icon>
-        <text class="ml-10rpx text-gray-400 text-24rpx">搜索壁纸</text>
-      </view>
-    </view>
+  <view class="pageBg min-h-screen">
+    <custom-navbar title="分类" @search="goSearch" />
 
     <view class="px-30rpx pt-15rpx grid grid-cols-3 gap-15rpx pb-100rpx">
       <theme-item
@@ -40,6 +27,7 @@ import { ref } from 'vue'
 import { onLoad, onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
 import { getClassify } from '@/service/wallpaper'
 import type { ClassifyItem } from '@/service/wallpaper'
+import CustomNavbar from '@/components/custom-navbar/custom-navbar.vue'
 
 const classifyList = ref<ClassifyItem[]>([])
 
