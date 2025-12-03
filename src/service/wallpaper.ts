@@ -32,6 +32,25 @@ export interface ClassifyItem {
   desc?: string
 }
 
+/** 专题数据 */
+export interface SubjectItem {
+  _id: string
+  picList: WallPaperItem[]
+  view_count: number
+  day: string
+  theme: string
+  size: number
+}
+
+/** 专题详情 */
+export interface SubjectDetail extends SubjectItem {
+  checked: boolean
+  type: number
+  user_id: string
+  description: string
+  createTime: number
+}
+
 /** 资讯数据 */
 export interface NewsItem {
   _id: string
@@ -76,6 +95,26 @@ export const getClassify = (
 ) => {
   return http<ClassifyItem[]>({
     url: '/classify',
+    method: 'GET',
+    query: params,
+  })
+}
+
+/** 获取专题列表 */
+export const getSubjectList = (
+  params: { pageNum?: number; pageSize?: number } = {},
+) => {
+  return http<SubjectItem[]>({
+    url: '/subjectList',
+    method: 'GET',
+    query: params,
+  })
+}
+
+/** 获取专题详情 */
+export const getSubjectDetail = (params: { id: string }) => {
+  return http<SubjectDetail>({
+    url: '/subjectDetail',
     method: 'GET',
     query: params,
   })
