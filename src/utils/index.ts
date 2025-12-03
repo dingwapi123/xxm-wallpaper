@@ -111,22 +111,33 @@ export const getAllPages = (key = 'needLogin') => {
  * 得到所有的需要登录的pages，包括主包和分包的
  * 只得到 path 数组
  */
-export const getNeedLoginPages = (): string[] => getAllPages('needLogin').map((page) => page.path)
+export const getNeedLoginPages = (): string[] =>
+  getAllPages('needLogin').map((page) => page.path)
 
 /**
  * 得到所有的需要登录的pages，包括主包和分包的
  * 只得到 path 数组
  */
-export const needLoginPages: string[] = getAllPages('needLogin').map((page) => page.path)
+export const needLoginPages: string[] = getAllPages('needLogin').map(
+  (page) => page.path,
+)
 
 /**
  * 根据微信小程序当前环境，判断应该获取的BaseUrl
  */
-export const getEnvBaseUrl = () => {
+export function getEnvBaseUrl() {
   // 请求基准地址
   let baseUrl = import.meta.env.VITE_SERVER_BASEURL
 
-  // 小程序端环境区分
+  // # 有些同学可能需要在微信小程序里面根据 develop、trial、release 分别设置上传地址，参考代码如下。
+  const VITE_SERVER_BASEURL__WEIXIN_DEVELOP =
+    'https://tea.qingnian8.com/api/bizhi'
+  const VITE_SERVER_BASEURL__WEIXIN_TRIAL =
+    'https://tea.qingnian8.com/api/bizhi'
+  const VITE_SERVER_BASEURL__WEIXIN_RELEASE =
+    'https://tea.qingnian8.com/api/bizhi'
+
+  // 微信小程序端环境区分
   if (isMp) {
     const {
       miniProgram: { envVersion },
@@ -134,13 +145,13 @@ export const getEnvBaseUrl = () => {
 
     switch (envVersion) {
       case 'develop':
-        baseUrl = 'https://ukw0y1.laf.run'
+        baseUrl = VITE_SERVER_BASEURL__WEIXIN_DEVELOP || baseUrl
         break
       case 'trial':
-        baseUrl = 'https://ukw0y1.laf.run'
+        baseUrl = VITE_SERVER_BASEURL__WEIXIN_TRIAL || baseUrl
         break
       case 'release':
-        baseUrl = 'https://ukw0y1.laf.run'
+        baseUrl = VITE_SERVER_BASEURL__WEIXIN_RELEASE || baseUrl
         break
     }
   }
